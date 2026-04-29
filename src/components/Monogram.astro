@@ -1,0 +1,34 @@
+---
+interface Props {
+  letters?: string;
+  size?: number;
+}
+const { letters = "AO", size = 80 } = Astro.props;
+const fontSize = Math.round(size * 0.42);
+---
+
+<div
+  class="monogram"
+  style={`width:${size}px;height:${size}px;`}
+>
+  <span style={`font-size:${fontSize}px`}>{letters}</span>
+</div>
+
+<style>
+  .monogram {
+    border-radius: 50%;
+    background: var(--primary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 12px color-mix(in srgb, var(--primary) 27%, transparent);
+    flex-shrink: 0;
+  }
+  .monogram span {
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--bg);
+    letter-spacing: 0.01em;
+    line-height: 1;
+  }
+</style>

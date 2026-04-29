@@ -1,0 +1,21 @@
+{
+  "name": "@klokie/theme",
+  "version": "0.1.0",
+  "description": "Shared design tokens, presets, and Astro components for klokie sites.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./presets/*": "./src/presets/*.ts",
+    "./tokens/base.css": "./src/tokens/base.css",
+    "./tokens/jordsang.css": "./src/tokens/jordsang.css",
+    "./tokens/klokie.css": "./src/tokens/klokie.css",
+    "./components/*": "./src/components/*",
+    "./layouts/*": "./src/layouts/*"
+  },
+  "files": ["src"],
+  "peerDependencies": {
+    "astro": "^5.0.0"
+  },
+  "license": "UNLICENSED",
+  "private": true
+}

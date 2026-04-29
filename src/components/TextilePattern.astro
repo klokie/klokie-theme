@@ -1,0 +1,36 @@
+---
+interface Props {
+  width?: number;
+  height?: number;
+  primary?: string;
+  accent?: string;
+  secondary?: string;
+}
+const {
+  width = 480,
+  height = 36,
+  primary = "var(--primary)",
+  accent = "var(--accent)",
+  secondary = "var(--secondary)",
+} = Astro.props;
+
+const tileWidth = 24;
+const tiles = Math.ceil(width / tileWidth);
+const tileIds = Array.from({ length: tiles }, (_, i) => i * tileWidth);
+const cy = Math.round(height / 2);
+---
+
+<svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} aria-hidden="true">
+  <line x1="0" y1="1" x2={width} y2="1" stroke={secondary} stroke-width="2" opacity="0.4" />
+  <g fill="none" stroke={primary} stroke-width="1.5" opacity="0.6">
+    {tileIds.map((x) => (
+      <polygon points={`${x + 12},4 ${x + 20},${cy} ${x + 12},${height - 4} ${x + 4},${cy}`} />
+    ))}
+  </g>
+  <g fill={accent} opacity="0.7">
+    {tileIds.map((x) => (
+      <circle cx={x + 12} cy={cy} r="2.5" />
+    ))}
+  </g>
+  <line x1="0" y1={height - 1} x2={width} y2={height - 1} stroke={secondary} stroke-width="2" opacity="0.4" />
+</svg>

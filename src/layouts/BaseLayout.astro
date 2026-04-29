@@ -1,0 +1,47 @@
+---
+import "../tokens/base.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  preset: {
+    tokensCss: string;
+    fonts: { googleFamilies?: string[] };
+    meta?: { locale?: string };
+  };
+  ogImage?: string;
+}
+const { title, description, preset, ogImage } = Astro.props;
+const lang = preset.meta?.locale?.split("-")[0] ?? "en";
+const fontHref = preset.fonts.googleFamilies?.length
+  ? `https://fonts.googleapis.com/css2?${preset.fonts.googleFamilies
+      .map((f) => `family=${f}`)
+      .join("&")}&display=swap`
+  : null;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="generator" content={Astro.generator} />
+    {fontHref && (
+      <>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="stylesheet" href={fontHref} />
+      </>
+    )}
+    <link rel="alternate" type="application/rss+xml" title={title} href="/rss.xml" />
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

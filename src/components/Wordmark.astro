@@ -1,0 +1,33 @@
+---
+interface Props {
+  name: string;
+  tagline?: string;
+  fontSize?: number;
+}
+const { name, tagline, fontSize = 44 } = Astro.props;
+const taglineSize = Math.round(fontSize * 0.38);
+---
+
+<div class="wordmark">
+  <span class="name" style={`font-size:${fontSize}px`}>{name}</span>
+  {tagline && (
+    <span class="tagline" style={`font-size:${taglineSize}px`}>{tagline}</span>
+  )}
+</div>
+
+<style>
+  .wordmark { display: flex; flex-direction: column; gap: 4px; }
+  .name {
+    font-family: var(--font-display);
+    color: var(--text);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.05;
+  }
+  .tagline {
+    font-family: var(--font-display);
+    color: var(--muted);
+    font-style: italic;
+    letter-spacing: 0.01em;
+  }
+</style>
