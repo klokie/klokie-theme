@@ -5,13 +5,15 @@ interface Props {
   tagline?: string;
   monogram?: string;
   nav?: NavItem[];
+  /** Where the brand/logo links to. Defaults to the site root. */
+  homeHref?: string;
 }
-const { title, tagline, monogram = "AO", nav = [] } = Astro.props;
+const { title, tagline, monogram = "AO", nav = [], homeHref = "/" } = Astro.props;
 import Monogram from "./Monogram.astro";
 ---
 
 <header class="site-header">
-  <a class="brand" href="/">
+  <a class="brand" href={homeHref}>
     <Monogram letters={monogram} size={56} />
     <div class="brand-text">
       <span class="brand-name">{title}</span>
