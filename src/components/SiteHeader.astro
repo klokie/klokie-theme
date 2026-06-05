@@ -68,10 +68,14 @@ import Monogram from "./Monogram.astro";
   nav {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 12px 24px;
+    /* On narrow screens, trailing slot content (e.g. a language switcher)
+       wraps onto its own line under the nav links instead of overflowing. */
+    flex-wrap: wrap;
   }
   nav ul {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
     list-style: none;
   }
