@@ -1,6 +1,6 @@
 {
   "name": "@klokie/theme",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Shared design tokens, presets, and Astro components for klokie sites.",
   "type": "module",
   "exports": {

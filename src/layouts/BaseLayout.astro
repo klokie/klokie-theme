@@ -10,9 +10,11 @@ interface Props {
     meta?: { locale?: string };
   };
   ogImage?: string;
+  /** Override the document language. Falls back to the preset locale. */
+  lang?: string;
 }
-const { title, description, preset, ogImage } = Astro.props;
-const lang = preset.meta?.locale?.split("-")[0] ?? "en";
+const { title, description, preset, ogImage, lang: langProp } = Astro.props;
+const lang = langProp ?? preset.meta?.locale?.split("-")[0] ?? "en";
 const fontHref = preset.fonts.googleFamilies?.length
   ? `https://fonts.googleapis.com/css2?${preset.fonts.googleFamilies
       .map((f) => `family=${f}`)
