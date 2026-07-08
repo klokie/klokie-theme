@@ -1,6 +1,6 @@
 {
   "name": "@klokie/theme",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Shared design tokens, presets, and Astro components for klokie sites.",
   "type": "module",
   "exports": {
@@ -12,7 +12,9 @@
     "./components/*": "./src/components/*",
     "./layouts/*": "./src/layouts/*"
   },
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "peerDependencies": {
     "astro": "^5.0.0"
   },

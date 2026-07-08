@@ -1,0 +1,100 @@
+---
+/**
+ * Opt-in PostHog + Sentry for klokie sites. Inject via BaseLayout's
+ * `<slot name="head" />`. No-ops when keys are missing (local dev),
+ * on localhost/preview hosts, and when the browser sends Do-Not-Track.
+ * Defaults to EU hosts per the klokie-web-stack standard.
+ */
+interface Props {
+  posthog?: { key?: string; host?: string };
+  sentry?: { dsn?: string; environment?: string };
+}
+const { posthog, sentry } = Astro.props;
+const ph = posthog?.key
+  ? { key: posthog.key, host: posthog.host || "https://eu.i.posthog.com" }
+  : null;
+const st = sentry?.dsn
+  ? { dsn: sentry.dsn, environment: sentry.environment || "production" }
+  : null;
+---
+
+{
+  (ph || st) && (
+    <script
+      is:inline
+      data-ph-key={ph?.key}
+      data-ph-host={ph?.host}
+      data-sentry-dsn={st?.dsn}
+      data-sentry-env={st?.environment}
+    >
+      (function () {
+        var s = document.currentScript.dataset;
+        var dnt = navigator.doNotTrack === "1" || window.doNotTrack === "1";
+        var local = /^(localhost|127\.|192\.168\.|0\.0\.0\.0)/.test(location.hostname);
+        if (dnt || local) return;
+
+        if (s.phKey) {
+          // official posthog-js snippet stub, then async load from the EU host
+          !(function (t, e) {
+            var o, n, p, r;
+            e.__SV ||
+              ((window.posthog = e),
+              (e._i = []),
+              (e.init = function (i, a, u) {
+                function g(t, e) {
+                  var o = e.split(".");
+                  2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                    (t[e] = function () {
+                      t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+                    });
+                }
+                ((p = t.createElement("script")).type = "text/javascript"),
+                  (p.async = !0),
+                  (p.src = a.api_host + "/static/array.js"),
+                  (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r);
+                var d = e;
+                for (
+                  void 0 !== u ? (d = e[u] = []) : (u = "posthog"),
+                    d.people = d.people || [],
+                    d.toString = function (t) {
+                      var e = "posthog";
+                      return "posthog" !== u && (e += "." + u), t || (e += " (stub)"), e;
+                    },
+                    d.people.toString = function () {
+                      return d.toString(1) + ".people (stub)";
+                    },
+                    o =
+                      "init capture register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(
+                        " ",
+                      ),
+                    n = 0;
+                  n < o.length;
+                  n++
+                )
+                  g(d, o[n]);
+                e._i.push([i, a, u]);
+              }),
+              (e.__SV = 1));
+          })(document, window.posthog || []);
+          window.posthog.init(s.phKey, {
+            api_host: s.phHost,
+            capture_pageview: true,
+            capture_pageleave: true,
+            autocapture: true,
+          });
+        }
+
+        if (s.sentryDsn) {
+          var sc = document.createElement("script");
+          sc.src = "https://browser.sentry-cdn.com/8.55.0/bundle.min.js";
+          sc.crossOrigin = "anonymous";
+          sc.onload = function () {
+            window.Sentry &&
+              window.Sentry.init({ dsn: s.sentryDsn, environment: s.sentryEnv });
+          };
+          document.head.appendChild(sc);
+        }
+      })();
+    </script>
+  )
+}
