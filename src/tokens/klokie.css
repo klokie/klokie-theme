@@ -1,17 +1,77 @@
+/* Klokie preset — dark-first engineer's-studio tokens for klokie.com.
+   Source of truth: klokie.com repo DESIGN.md + the Klokie Design System
+   (claude-design-Klokie Design System/colors_and_type.css). */
+
 :root {
-  --bg:         #0a0a0f;
-  --bg-alt:     #0f0f17;
-  --surface:    #151520;
-  --code-bg:    #0d0d14;
-  --text:       #f5f5f0;
-  --muted:      #b0afa8;
-  --primary:    #fd5b17;
-  --secondary:  #2a6ad1;
-  --accent:     #ffb600;
+  --bg:          #0a0a0f;
+  --bg-alt:      #0f0f17;
+  --surface:     #151520;
+  --surface-alt: #1c1c2a;
+  --code-bg:     #0d0d14;
 
-  --font-display: "Futura Std", Jost, "Century Gothic", sans-serif;
-  --font-body:    "Futura Std", Jost, "Century Gothic", sans-serif;
+  --text:        #f5f5f0;
+  --muted:       #b0afa8;
+  --dim:         #8b8a83;
+  --border:      #2a2a38;
+  --border-soft: #1e1e2a;
 
-  --container-max: 880px;
+  --primary:     #fd5b17; /* orange — logo dot, links, active filter */
+  --secondary:   #2a6ad1;
+  --accent:      #ffb600;
+
+  /* rainbow topic palette — case category chips + signature stripe */
+  --t-red:    #b30603;
+  --t-orange: #fd5b17;
+  --t-yellow: #ffb600;
+  --t-green:  #83ea30;
+  --t-blue:   #2a6ad1;
+  --t-indigo: #4a63c8;
+  --t-violet: #9a79ad;
+
+  --font-display: "Futura Std", Jost, "Century Gothic", "Avenir Next", sans-serif;
+  --font-body:    "Futura Std", Jost, "Century Gothic", "Avenir Next", sans-serif;
+  --font-mono:    "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --container-max: 960px;
   --radius-card: 6px;
+
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+}
+
+/* light mode — warm cream paper (design-system light tokens) */
+[data-theme="light"] {
+  --bg:          #f5f3ed;
+  --bg-alt:      #ebe8df;
+  --surface:     #ffffff;
+  --surface-alt: #e4e0d4;
+  --code-bg:     #edeae1;
+
+  --text:        #14141a;
+  --muted:       #4d4c45;
+  --dim:         #878680;
+  --border:      #d8d4c6;
+  --border-soft: #e2ded2;
+
+  /* darker chip tints for contrast on cream */
+  --t-green:  #4c9a0a;
+  --t-yellow: #b98200;
+  --t-indigo: #07329f;
+  --t-violet: #724f83;
+}
+
+/* signature: 3px rainbow stripe (page top + footer top) */
+.rainbow-stripe {
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    var(--t-red) 0 14.28%,
+    var(--t-orange) 14.28% 28.57%,
+    var(--t-yellow) 28.57% 42.85%,
+    var(--t-green) 42.85% 57.14%,
+    var(--t-blue) 57.14% 71.42%,
+    var(--t-indigo) 71.42% 85.71%,
+    var(--t-violet) 85.71% 100%
+  );
 }
