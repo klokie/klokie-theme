@@ -9,6 +9,7 @@
     "./tokens/base.css": "./src/tokens/base.css",
     "./tokens/jordsang.css": "./src/tokens/jordsang.css",
     "./tokens/klokie.css": "./src/tokens/klokie.css",
+    "./tokens/eke-country.css": "./src/tokens/eke-country.css",
     "./components/*": "./src/components/*",
     "./layouts/*": "./src/layouts/*"
   },

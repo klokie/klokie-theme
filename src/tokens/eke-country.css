@@ -1,0 +1,57 @@
+/*
+ * Eke Country — subtheme tokens.
+ *
+ * A live-music venue in Eke, southern Gotland (formerly Suder Country).
+ * Direction: rustic without kitsch. Barn wood at night, limestone, and the
+ * amber of a stage light — not Nashville clipart. The audience is local
+ * before it is tourist.
+ *
+ * THIS FILE IS THE ADJUSTABLE SURFACE. Colour, type and rhythm all live here.
+ * If a design change requires editing a .astro component, the change belongs
+ * in this file instead. Keep it that way — the venue owners are expected to
+ * want tweaks, and this is the one file to hand to Claude Design.
+ */
+
+:root {
+  /* Amber stage light — the one warm hit against the dark */
+  --primary: #e0a03c;
+  /* Lichen on limestone — Gotland's actual palette, not prairie green */
+  --secondary: #8a9a7b;
+  /* Warm rust, for accents and eyebrows */
+  --accent: #c8663c;
+
+  /* Night in a barn: dark, warm, never blue-black */
+  --bg: #1a1512;
+  --surface: #241d18;
+  /* Limestone */
+  --text: #f2ece3;
+  --muted: #a1917f;
+  --border: #3a2f26;
+
+  --font-display: "Bitter", "Zilla Slab", Georgia, serif;
+  --font-body:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
+    sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --container-max: 760px;
+  --radius-card: 3px;
+  --radius-social: 6px;
+}
+
+/*
+ * Daylight variant. Not wired to a toggle yet — flipping the site to light
+ * is a matter of setting data-theme="light" on <html>. Kept in sync
+ * deliberately so the choice stays cheap to reverse.
+ */
+:root[data-theme="light"] {
+  --primary: #a8622a;
+  --secondary: #5f7350;
+  --accent: #b9522c;
+
+  --bg: #f4efe6;
+  --surface: #e9e1d4;
+  --text: #241d18;
+  --muted: #6b5e4f;
+  --border: #d5c9b6;
+}
