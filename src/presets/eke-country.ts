@@ -5,11 +5,10 @@ const ekeCountry: ThemePreset = {
   label: "Eke Country",
   tokensCss: "@klokie/theme/tokens/eke-country.css",
   fonts: {
-    googleFamilies: [
-      "Bitter:ital,wght@0,400;0,600;0,700;1,400",
-      "Inter:wght@400;500;600",
-    ],
-    displayStack: '"Bitter", "Zilla Slab", Georgia, serif',
+    // Rye ships one weight only — no bold, no italic. That's normal for a
+    // wood-type display face and fine for headlines; don't ask it for emphasis.
+    googleFamilies: ["Rye", "Inter:wght@400;500;600"],
+    displayStack: '"Rye", "Bitter", Georgia, serif',
     bodyStack:
       '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif',
   },

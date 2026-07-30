@@ -28,7 +28,14 @@
   --muted: #a1917f;
   --border: #3a2f26;
 
-  --font-display: "Bitter", "Zilla Slab", Georgia, serif;
+  /*
+   * Rye — western wood type, closest of the Google options to the venue's own
+   * painted sign. Headlines only: it has a single weight and no italic, and
+   * these faces are drawn for posters and short words. Body text stays in a
+   * plain sans, which is a deliberate split, not an oversight — see /fonter
+   * on the preview for the side-by-side that shows why.
+   */
+  --font-display: "Rye", "Bitter", Georgia, serif;
   --font-body:
     "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
     sans-serif;
