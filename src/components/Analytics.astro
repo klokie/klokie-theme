@@ -6,12 +6,32 @@
  * Defaults to EU hosts per the klokie-web-stack standard.
  */
 interface Props {
-  posthog?: { key?: string; host?: string };
+  posthog?: {
+    key?: string;
+    host?: string;
+    /**
+     * Store nothing on the visitor's device — no cookies, no localStorage.
+     *
+     * ePrivacy requires consent for analytics storage, so a site with no
+     * cookie banner should set this. The trade is real and worth knowing:
+     * without persistence PostHog can't recognise a returning visitor, so
+     * "unique users" becomes roughly "sessions". For a small site with no
+     * banner that's a fair swap; for one that already asks consent it isn't.
+     *
+     * Defaults to false so existing sites keep their current behaviour and
+     * their historical numbers stay comparable.
+     */
+    cookieless?: boolean;
+  };
   sentry?: { dsn?: string; environment?: string };
 }
 const { posthog, sentry } = Astro.props;
 const ph = posthog?.key
-  ? { key: posthog.key, host: posthog.host || "https://eu.i.posthog.com" }
+  ? {
+      key: posthog.key,
+      host: posthog.host || "https://eu.i.posthog.com",
+      cookieless: posthog.cookieless ? "1" : "",
+    }
   : null;
 const st = sentry?.dsn
   ? { dsn: sentry.dsn, environment: sentry.environment || "production" }
@@ -24,6 +44,7 @@ const st = sentry?.dsn
       is:inline
       data-ph-key={ph?.key}
       data-ph-host={ph?.host}
+      data-ph-cookieless={ph?.cookieless}
       data-sentry-dsn={st?.dsn}
       data-sentry-env={st?.environment}
     >
@@ -76,12 +97,21 @@ const st = sentry?.dsn
               }),
               (e.__SV = 1));
           })(document, window.posthog || []);
-          window.posthog.init(s.phKey, {
+          var phOpts = {
             api_host: s.phHost,
             capture_pageview: true,
             capture_pageleave: true,
             autocapture: true,
-          });
+          };
+          if (s.phCookieless) {
+            // memory persistence writes nothing to the device, so no
+            // ePrivacy consent is needed for storage. identified_only stops
+            // person profiles being created for anonymous visitors.
+            phOpts.persistence = "memory";
+            phOpts.person_profiles = "identified_only";
+            phOpts.disable_session_recording = true;
+          }
+          window.posthog.init(s.phKey, phOpts);
         }
 
         if (s.sentryDsn) {
