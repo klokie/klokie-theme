@@ -10,6 +10,14 @@ interface Props {
     key?: string;
     host?: string;
     /**
+     * Where the PostHog *app* lives, as opposed to where events are sent.
+     *
+     * Only matters when `host` is a reverse proxy (a.klokie.com and
+     * friends): without it the SDK builds "view in PostHog" links against
+     * the proxy, which serves ingest, not the UI. Harmless otherwise.
+     */
+    uiHost?: string;
+    /**
      * Store nothing on the visitor's device — no cookies, no localStorage.
      *
      * ePrivacy requires consent for analytics storage, so a site with no
@@ -30,6 +38,7 @@ const ph = posthog?.key
   ? {
       key: posthog.key,
       host: posthog.host || "https://eu.i.posthog.com",
+      uiHost: posthog.uiHost || "https://eu.posthog.com",
       cookieless: posthog.cookieless ? "1" : "",
     }
   : null;
@@ -44,6 +53,7 @@ const st = sentry?.dsn
       is:inline
       data-ph-key={ph?.key}
       data-ph-host={ph?.host}
+      data-ph-ui-host={ph?.uiHost}
       data-ph-cookieless={ph?.cookieless}
       data-sentry-dsn={st?.dsn}
       data-sentry-env={st?.environment}
@@ -99,6 +109,7 @@ const st = sentry?.dsn
           })(document, window.posthog || []);
           var phOpts = {
             api_host: s.phHost,
+            ui_host: s.phUiHost,
             capture_pageview: true,
             capture_pageleave: true,
             autocapture: true,
