@@ -1,6 +1,6 @@
 {
   "name": "@klokie/theme",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Shared design tokens, presets, and Astro components for klokie sites.",
   "type": "module",
   "exports": {
@@ -11,7 +11,8 @@
     "./tokens/klokie.css": "./src/tokens/klokie.css",
     "./tokens/eke-country.css": "./src/tokens/eke-country.css",
     "./components/*": "./src/components/*",
-    "./layouts/*": "./src/layouts/*"
+    "./layouts/*": "./src/layouts/*",
+    "./tokens/ggm.css": "./src/tokens/ggm.css"
   },
   "files": [
     "src"

@@ -7,18 +7,30 @@ interface Props {
   nav?: NavItem[];
   /** Where the brand/logo links to. Defaults to the site root. */
   homeHref?: string;
+  /**
+   * An image logo, for sites that have a real one. Replaces the monogram AND
+   * the title text: a logo that already contains the name shouldn't sit next
+   * to the name typed out again. `title` is still used as the alt text.
+   */
+  logo?: { src: string; width: number; height: number };
 }
-const { title, tagline, monogram = "AO", nav = [], homeHref = "/" } = Astro.props;
+const { title, tagline, monogram = "AO", nav = [], homeHref = "/", logo } = Astro.props;
 import Monogram from "./Monogram.astro";
 ---
 
 <header class="site-header">
   <a class="brand" href={homeHref}>
-    <Monogram letters={monogram} size={56} />
-    <div class="brand-text">
-      <span class="brand-name">{title}</span>
-      {tagline && <span class="brand-tagline">{tagline}</span>}
-    </div>
+    {logo ? (
+      <img class="brand-logo" src={logo.src} width={logo.width} height={logo.height} alt={title} />
+    ) : (
+      <>
+        <Monogram letters={monogram} size={56} />
+        <div class="brand-text">
+          <span class="brand-name">{title}</span>
+          {tagline && <span class="brand-tagline">{tagline}</span>}
+        </div>
+      </>
+    )}
   </a>
   {(nav.length > 0 || Astro.slots.has("nav-end")) && (
     <nav>
@@ -52,6 +64,7 @@ import Monogram from "./Monogram.astro";
     color: var(--text);
   }
   .brand:hover { text-decoration: none; }
+  .brand-logo { display: block; height: 56px; width: auto; }
   .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
   .brand-name {
     font-family: var(--font-display);

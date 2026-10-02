@@ -1,0 +1,43 @@
+/*
+ * Geek Girl Meetup — subtheme tokens.
+ *
+ * A Stockholm-founded NGO for women in tech. Direction: the logo, and nothing
+ * the logo doesn't already say — one saturated cyan, black type, white paper.
+ * Clean and confident rather than "techy"; no circuit-board clipart.
+ *
+ * THIS FILE IS THE ADJUSTABLE SURFACE. Colour, type and rhythm all live here.
+ * If a design change requires editing a .astro component, the change belongs
+ * in this file instead.
+ */
+
+:root {
+  /*
+   * Logo cyan, sampled from the GGM monogram (#10b8f0). It is only 2.3:1 on
+   * white, so it is for fills, rules and large display marks — never body
+   * text or links. --primary is the darkened variant that passes AA (5.0:1).
+   */
+  --brand: #10b8f0;
+  --primary: #0077a8;
+  --secondary: #10b8f0;
+  --accent: #0b5f86;
+
+  --bg: #ffffff;
+  --surface: #f2f8fb;
+  --text: #111111;
+  --muted: #5a6670;
+  --border: #dbe4ea;
+
+  /*
+   * The wordmark is a Helvetica-style grotesque. Space Grotesk keeps that
+   * plainness for headlines with a little more character; Inter for body.
+   */
+  --font-display: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-body:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
+    sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --container-max: 860px;
+  --radius-card: 12px;
+  --radius-social: 999px;
+}
