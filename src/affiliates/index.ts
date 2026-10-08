@@ -20,7 +20,10 @@ const bareHost = (host: string) => host.toLowerCase().replace(/^www\./, "");
 
 function isActive(p: AffiliateProgram): boolean {
   if (p.status !== "active") return false;
-  return p.rewrite.kind === "url" ? Boolean(p.rewrite.url) : Object.keys(p.rewrite.params).length > 0;
+  const rw = p.rewrite;
+  if (rw.kind === "params") return Object.keys(rw.params).length > 0;
+  if (rw.kind === "deeplink") return rw.template.includes("{url}");
+  return Boolean(rw.url);
 }
 
 export function findProgram(href: string, list: AffiliateProgram[] = programs): AffiliateProgram | undefined {
@@ -52,6 +55,12 @@ export function affiliateLink(
     return { href: url.href, program };
   }
 
+  if (rw.kind === "deeplink") {
+    return { href: rw.template.replace("{url}", encodeURIComponent(href)), program };
+  }
+
+  const linked = rw.links?.[url.pathname];
+  if (linked) return { href: linked, program };
   const paths = rw.paths ?? ["/"];
   return paths.includes(url.pathname) ? { href: rw.url, program } : undefined;
 }

@@ -60,7 +60,9 @@ export default defineConfig({ integrations: [mdx(), sitemap(), affiliates()] });
 - Rewritten links get `rel="sponsored noopener"` and `data-affiliate="<id>"`.
 - Two rewrite kinds: `params` appends e.g. `?ref=klokie` to any page on the
   host; `url` swaps homepage links (or listed `paths`) for a personal referral
-  URL and leaves deep links (docs etc.) alone.
+  URL and leaves deep links (docs etc.) alone; its `links` map gives
+  specific paths their own tracking URL (one per Gumroad product); and
+  `deeplink` wraps any link in a network redirect (CJ, Impact) via `{url}`.
 - klokie.com serves `/go/<id>` from the same registry — the link to paste in
   email, LinkedIn, or docs outside the sites. Pending programs redirect to the
   plain homepage, so a go-link is safe to share before the code exists.

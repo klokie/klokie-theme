@@ -17,7 +17,20 @@ const list: AffiliateProgram[] = [
     hosts: ["url.example"],
     homepage: "https://url.example/",
     status: "active",
-    rewrite: { kind: "url", url: "https://partners.url.example/r/klokie", paths: ["/", "/pricing"] },
+    rewrite: {
+      kind: "url",
+      url: "https://partners.url.example/r/klokie",
+      paths: ["/", "/pricing"],
+      links: { "/l/abc": "https://partners.url.example/r/klokie/abc" },
+    },
+  },
+  {
+    id: "deep-co",
+    name: "Deep Co",
+    hosts: ["deep.example"],
+    homepage: "https://deep.example/",
+    status: "active",
+    rewrite: { kind: "deeplink", template: "https://track.example/click-1-2?url={url}" },
   },
   {
     id: "pending-co",
@@ -46,6 +59,16 @@ describe("affiliateUrl", () => {
     expect(affiliateUrl("https://url.example/docs/setup", list)).toBe("https://url.example/docs/setup");
   });
 
+  it("maps listed paths to their own tracking links", () => {
+    expect(affiliateUrl("https://url.example/l/abc", list)).toBe("https://partners.url.example/r/klokie/abc");
+  });
+
+  it("wraps any link in a deeplink template, URL-encoded", () => {
+    expect(affiliateUrl("https://deep.example/hosting/?x=1", list)).toBe(
+      "https://track.example/click-1-2?url=https%3A%2F%2Fdeep.example%2Fhosting%2F%3Fx%3D1",
+    );
+  });
+
   it("ignores pending programs, other subdomains, and non-http links", () => {
     expect(affiliateUrl("https://pending.example/", list)).toBe("https://pending.example/");
     expect(affiliateUrl("https://app.params.example/", list)).toBe("https://app.params.example/");
@@ -62,6 +85,7 @@ describe("goLink", () => {
   it("resolves active programs to their referral link", () => {
     expect(goLink("url-co", list)).toBe("https://partners.url.example/r/klokie");
     expect(goLink("params-co", list)).toBe("https://params.example/?ref=klokie");
+    expect(goLink("deep-co", list)).toBe("https://track.example/click-1-2?url=https%3A%2F%2Fdeep.example%2F");
   });
 
   it("falls back to the homepage for pending programs, undefined for unknown ids", () => {

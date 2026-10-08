@@ -8,8 +8,15 @@ export type AffiliateRewrite =
    * Replace the link with a personal referral URL — for programs that hand
    * out one tracking link. Only bare homepage links (path `/`) or the listed
    * `paths` are replaced, so a link to a specific docs page stays a docs link.
+   * `links` maps further exact paths to their own tracking URLs (e.g. one
+   * Gumroad affiliate link per product).
    */
-  | { kind: "url"; url: string; paths?: string[] };
+  | { kind: "url"; url: string; paths?: string[]; links?: Record<string, string> }
+  /**
+   * Wrap any link in a network's deep-link redirect — CJ, Impact, etc.
+   * `{url}` in the template is replaced with the URL-encoded original link.
+   */
+  | { kind: "deeplink"; template: string };
 
 export interface AffiliateProgram {
   /** Slug used for the go-link: klokie.com/go/<id>. */
