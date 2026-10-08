@@ -97,7 +97,7 @@ export const programs: AffiliateProgram[] = [
     hosts: ["lunchmoney.app"],
     homepage: "https://lunchmoney.app/",
     status: "pending",
-    // Apply: https://partners.lunchmoney.app/ — US$15 per paid subscriber.
+    // Applied 2026-10-08 as lunchmoney@klokie.com, awaiting approval (https://partners.lunchmoney.app/). US$15 per paid subscriber, paid by IBAN transfer (not PayPal), US$30 minimum.
     rewrite: { kind: "url", url: "" },
   },
 
