@@ -69,3 +69,7 @@ export default defineConfig({ integrations: [mdx(), sitemap(), affiliates()] });
 
 After changing the registry, run `pnpm update @klokie/theme` in each site — the
 lockfile pins the theme commit, and nothing changes until it moves.
+Local builds can also serve **stale links**: Astro's content-layer cache
+(`node_modules/.astro/data-store.json`) keeps rendered Markdown keyed on the
+file, not the rehype config. Delete it before checking a registry change
+locally. CI builds from a clean checkout and is unaffected.
