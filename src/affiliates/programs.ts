@@ -39,6 +39,16 @@ export const programs: AffiliateProgram[] = [
     rewrite: { kind: "params", params: { atp: "klokie" } },
   },
   {
+    id: "lunchmoney",
+    name: "Lunch Money",
+    hosts: ["lunchmoney.app"],
+    homepage: "https://lunchmoney.app/",
+    status: "active",
+    // Applied 2026-10-08 as lunchmoney@klokie.com; approved 2026-10-10.
+    // US$15 per paid subscriber, paid by IBAN transfer (not PayPal), US$30 minimum.
+    rewrite: { kind: "url", url: "https://lunchmoney.app?fp_ref=daniel-grossfeld-0776c5" },
+  },
+  {
     id: "fachords",
     name: "FaChords Guitar (ebooks)",
     // The free site, fachords.com, has no program: link it plainly.
@@ -91,16 +101,6 @@ export const programs: AffiliateProgram[] = [
     // https://1password.com/affiliate
     rewrite: { kind: "deeplink", template: "" },
   },
-  {
-    id: "lunchmoney",
-    name: "Lunch Money",
-    hosts: ["lunchmoney.app"],
-    homepage: "https://lunchmoney.app/",
-    status: "pending",
-    // Applied 2026-10-08 as lunchmoney@klokie.com, awaiting approval (https://partners.lunchmoney.app/). US$15 per paid subscriber, paid by IBAN transfer (not PayPal), US$30 minimum.
-    rewrite: { kind: "url", url: "" },
-  },
-
   // ── To join (uses and recommends) ─────────────────────────────────────
   {
     id: "digitalocean",
