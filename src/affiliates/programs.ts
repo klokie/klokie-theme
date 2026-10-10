@@ -78,8 +78,9 @@ export const programs: AffiliateProgram[] = [
     homepage: "https://workspace.google.com/",
     status: "pending",
     // Applied 2026-10-08 via the referral program; awaiting approval.
-    // Paste the personal referral URL into `url`. Also on CJ (advertiser
-    // 5261736) — if that approves first, switch to a `deeplink` rewrite.
+    // Paste the personal referral URL into `url`. Also on CJ: global
+    // 5230914 and EMEA 5261740 (not LATAM 5261736) — if one approves
+    // first, switch to a `deeplink` rewrite.
     rewrite: { kind: "url", url: "" },
   },
   {
