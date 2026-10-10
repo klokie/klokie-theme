@@ -78,7 +78,8 @@ export const programs: AffiliateProgram[] = [
     homepage: "https://workspace.google.com/",
     status: "pending",
     // Applied 2026-10-08 via the referral program; awaiting approval.
-    // Paste the personal referral URL into `url`.
+    // Paste the personal referral URL into `url`. Also on CJ (advertiser
+    // 5261736) — if that approves first, switch to a `deeplink` rewrite.
     rewrite: { kind: "url", url: "" },
   },
   {
@@ -87,8 +88,8 @@ export const programs: AffiliateProgram[] = [
     hosts: ["namecheap.com"],
     homepage: "https://www.namecheap.com/",
     status: "pending",
-    // Via CJ (needs reactivation) or Impact. Use the network's deep-link
-    // format, e.g. CJ: https://www.anrdoezrs.net/click-<PID>-<AID>?url={url}
+    // Via CJ, advertiser 4055157 (apply once CJ is approved). Use the
+    // deep-link format, e.g. https://www.anrdoezrs.net/click-<PID>-<AID>?url={url}
     rewrite: { kind: "deeplink", template: "" },
   },
   {
@@ -97,7 +98,7 @@ export const programs: AffiliateProgram[] = [
     hosts: ["1password.com"],
     homepage: "https://1password.com/",
     status: "pending",
-    // Via CJ — apply to the 1Password program once CJ is reactivated.
+    // Via CJ, advertiser 5140517 — apply once CJ is approved.
     // https://1password.com/affiliate
     rewrite: { kind: "deeplink", template: "" },
   },
