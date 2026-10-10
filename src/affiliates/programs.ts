@@ -103,6 +103,17 @@ export const programs: AffiliateProgram[] = [
     // https://1password.com/affiliate
     rewrite: { kind: "deeplink", template: "" },
   },
+  {
+    id: "thomann",
+    name: "Thomann",
+    hosts: ["thomann.de"],
+    homepage: "https://www.thomann.de/",
+    status: "pending",
+    // Applied 2026-10-11 via Clickfire (app.clickfire.io/thomann), billing
+    // S2A Interactive AB. Below their stated traffic minimum, so may decline.
+    // Add other storefront hosts once the link format is known.
+    rewrite: { kind: "deeplink", template: "" },
+  },
   // ── To join (uses and recommends) ─────────────────────────────────────
   {
     id: "digitalocean",
