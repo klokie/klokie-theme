@@ -106,12 +106,13 @@ export const programs: AffiliateProgram[] = [
   {
     id: "thomann",
     name: "Thomann",
-    hosts: ["thomann.de"],
+    hosts: ["thomann.de", "thomannmusic.com"],
     homepage: "https://www.thomann.de/",
     status: "active",
     // Clickfire (app.clickfire.io/thomann), billing S2A Interactive AB.
     // Applied 2026-10-11, approved 2026-10-12. 3.5% per sale. Thomann serves
-    // every storefront (/gb, /se, ...) from thomann.de, so one host suffices.
+    // the German storefront on thomann.de; thomannmusic.com is the international
+    // one (en-se etc.) and takes the same affid (assumed, check in Clickfire).
     rewrite: { kind: "params", params: { offid: "1", affid: "6968" } },
   },
   // ── To join (uses and recommends) ─────────────────────────────────────
